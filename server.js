@@ -57,7 +57,7 @@ function sign(res, payload){
   res.cookie('token', token, {
     httpOnly: true,
     sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production', // bật secure khi chạy HTTPS
+    secure: false, // production: true nếu dùng https
     maxAge: 2 * 60 * 60 * 1000
   });
 }
@@ -153,7 +153,7 @@ app.post('/auth/login-student', (req,res)=>{
   res.json({ ok:true, role:'student' });
 });
 app.post('/auth/logout', (req,res)=>{
-  res.clearCookie('token', { httpOnly:true, sameSite:'lax', secure:process.env.NODE_ENV === 'production' });
+  res.clearCookie('token', { httpOnly:true, sameSite:'lax', secure:false });
   res.json({ ok:true });
 });
 
