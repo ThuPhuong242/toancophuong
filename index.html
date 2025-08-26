@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Học Toán cùng cô Phương | Landing Page</title>
+  <meta name="description" content="Bài học mới nhất, quản lí lớp học, theo dõi điểm số, xếp hạng và tiến độ học tập." />
+  <meta name="keywords" content="Học Toán,cô Phương,Toán THPT,bài tập,điểm số,xếp hạng,lớp học" />
+  <link rel="canonical" href="/" />
+  <meta property="og:title" content="Học Toán cùng cô Phương" />
+  <meta property="og:description" content="Bài học mới nhất, quản lí lớp học, theo dõi điểm số và tiến độ." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#F6C90E" />
+
+  <style>
+    :root{
+      --yellow:#F6C90E; --bg:#fffdf6; --text:#222; --muted:#6b7280;
+      --card:#ffffff; --border:#f1f1f1; --shadow:0 8px 24px rgba(0,0,0,.06);
+      --radius:16px; --container:1100px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .container{max-width:var(--container);margin-inline:auto;padding:0 16px}
+    header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.02)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.1rem}
+    .logo img{width:42px;height:42px;object-fit:cover;border-radius:50%;border:3px solid var(--yellow);background:#fff}
+    .brand{display:flex;flex-direction:column;line-height:1.2}
+    .brand span:last-child{color:var(--muted);font-weight:600;font-size:.9rem}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:10px 14px;border-radius:999px;font-weight:600}
+    .menu a:hover,.menu a[aria-current="page"]{background:var(--yellow);box-shadow:var(--shadow)}
+    #nav-toggle{display:none}
+    .burger{display:none;cursor:pointer;border:2px solid #111;padding:8px 10px;border-radius:10px}
+    .burger span{display:block;width:22px;height:2px;background:#111;margin:4px 0}
+
+    .hero{position:relative;isolation:isolate;background:linear-gradient(180deg,#fff 0,var(--bg) 100%);padding:48px 0 18px;overflow:hidden}
+    .hero::before,.hero::after{content:"";position:absolute;inset:auto -10% 0 -10%;height:280px;z-index:-1;
+      background:radial-gradient(ellipse at 10% 20%, rgba(246,201,14,.25) 0 35%, transparent 36%),radial-gradient(ellipse at 90% 0%, rgba(246,201,14,.18) 0 30%, transparent 31%);
+      filter:blur(12px);}
+    .float-math{position:absolute;inset:0;pointer-events:none;z-index:0}
+    .float-math span{position:absolute;font-weight:800;opacity:.17;user-select:none;animation: drift 12s linear infinite;}
+    @keyframes drift{from{transform:translateY(10px)} to{transform:translateY(-20px)}}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;position:relative;z-index:1}
+    .hero h1{font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.2;margin:0 0 10px}
+    .highlight{background:linear-gradient(transparent 60%, rgba(246,201,14,.45) 60%);border-radius:6px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;border:2px solid #111;background:var(--yellow);font-weight:800;box-shadow:var(--shadow)}
+    .btn-outline{background:#fff;border:2px dashed #111}
+    section{padding:28px 0}
+    .section-title{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+    .section-title h2{font-size:clamp(1.2rem,2.1vw,1.6rem);margin:0}
+    .hint{color:var(--muted);font-size:.95rem}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 4;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px;font-size:1.05rem}
+    .tiny{font-size:.95rem;color:var(--muted)}
+    .table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px;background:#fff}
+    table{width:100%;border-collapse:collapse;font-size:.95rem}
+    th,td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+    th{background:#fff9da;color:#111}
+    tr:hover td{background:#fffef2}
+    .study-gate{display:grid;gap:12px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    label{font-weight:700}
+    select,input,textarea,button{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--border);background:#fff}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-small{padding:10px 14px;border-radius:12px;border:2px solid #111;background:var(--yellow);font-weight:800}
+    .progress{height:10px;background:#fff3b7;border-radius:999px;overflow:hidden;border:1px solid #e8e0a3}
+    .progress > span{display:block;height:100%;background:var(--yellow);width:0%}
+    .remarks{display:grid;gap:10px}
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:#fff;border:1px dashed #111;font-weight:600}
+    .pill.good{background:#fefbf0}
+    footer{margin-top:28px;padding:18px 0;background:#fff;border-top:1px solid var(--border)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .social{display:flex;gap:12px}
+    .social a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;border:2px solid #111;background:#fff}
+    .copy{color:var(--muted);font-size:.95rem}
+    [data-role="guest"] [data-guard="teacher"],[data-role="student"] [data-guard="teacher"] { display:none !important; }
+    [data-role="guest"] [data-guard="student"] { display:none !important; }
+    #student-private{ display:none; }
+    .math-strip{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .math-card{grid-column:span 4;background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+    .math-card svg{width:68px;height:68px;flex:0 0 68px}
+    @media (max-width: 920px){.hero-grid{grid-template-columns:1fr}.card{grid-column:span 6}.row{grid-template-columns:1fr}}
+    @media (max-width: 680px){.menu{position:fixed;inset:64px 12px auto 12px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:10px;display:none;flex-direction:column}.burger{display:inline-block}#nav-toggle:checked ~ .menu{display:flex}.card{grid-column:span 12}}
+    .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{position:static;width:auto;height:auto;background:#000;color:#fff;padding:8px;border-radius:8px}
+  </style>
+</head>
+<body data-role="guest">
+  <a class="skip" href="#main">Bỏ qua điều hướng</a>
+
+  <header role="banner">
+    <div class="container nav">
+      <a class="logo" href="/" aria-label="Trang chủ Học Toán cùng cô Phương">
+        <img src="/logo-placeholder.png" alt="Logo Học Toán cùng cô Phương" />
+        <span class="brand">
+          <span>Học Toán cùng</span>
+          <span>cô Phương</span>
+        </span>
+      </a>
+
+      <input type="checkbox" id="nav-toggle" aria-label="Mở menu" />
+      <label class="burger" for="nav-toggle" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="menu" aria-label="Chính">
+        <a href="#trang-chu" aria-current="page">Trang chủ</a>
+        <a href="#quan-li-lop">Quản lí lớp học</a>
+        <a href="#hoc-tap">Học tập</a>
+        <a href="#lien-he">Liên hệ</a>
+      </nav>
+
+      <div class="tiny" id="auth-mini">
+        <button type="button" id="login-teacher" class="btn btn-outline" style="padding:6px 10px">Đăng nhập GV (mã)</button>
+        <button type="button" id="logout" class="btn btn-outline" style="padding:6px 10px; display:none">Đăng xuất</button>
+        <span id="whoami" class="tiny" style="margin-left:8px;color:#6b7280"></span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="trang-chu" class="hero" aria-labelledby="home-title">
+      <div class="float-math" aria-hidden="true">
+        <span style="left:6%; top:18%; font-size:48px;">∑</span>
+        <span style="left:84%; top:12%; font-size:40px; animation-duration:14s;">π</span>
+        <span style="left:18%; top:60%; font-size:36px; animation-duration:10s;">√</span>
+        <span style="left:72%; top:66%; font-size:52px; animation-duration:11s;">∞</span>
+        <span style="left:40%; top:28%; font-size:44px; animation-duration:13s;">Δ</span>
+      </div>
+
+      <div class="container hero-grid">
+        <div>
+          <h1 id="home-title">Cùng <span class="highlight">nâng tầm Toán học</span> mỗi ngày</h1>
+          <p>Khám phá bài học mới nhất, theo dõi tiến độ, điểm số và nhận xét để bứt phá kết quả học tập.</p>
+          <div class="cta">
+            <a class="btn" href="#hoc-tap">Bắt đầu học</a>
+            <a class="btn btn-outline" href="#quan-li-lop">Quản lí lớp học</a>
+          </div>
+        </div>
+        <div>
+          <div class="grid" style="margin-top:12px">
+            <article class="card">
+              <h3>Bất đẳng thức Cauchy – Bài tập vận dụng</h3>
+              <p class="tiny">Cập nhật: 26/08/2025 • Lớp 10</p>
+              <p>Tổng hợp dạng bài thường gặp, gợi ý lời giải và lưu ý sai lầm hay mắc.</p>
+            </article>
+            <article class="card">
+              <h3>Hàm số bậc hai – Đồ thị & cực trị</h3>
+              <p class="tiny">Cập nhật: 25/08/2025 • Lớp 11</p>
+              <p>Nhận diện nhanh dạng đồ thị, cách tịnh tiến và ứng dụng tối ưu.</p>
+            </article>
+            <article class="card">
+              <h3>Tổ hợp – Chỉnh hợp & Hoán vị</h3>
+              <p class="tiny">Cập nhật: 24/08/2025 • Lớp 12</p>
+              <p>Bộ bài tập phân bậc, có lời giải gợi ý và mẹo kiểm tra đáp án.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="math-art-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="math-art-title">Góc Toán học sinh động</h2>
+          <span class="hint">Hình học – Đồ thị – Công thức</span>
+        </div>
+        <div class="math-strip">
+          <div class="math-card">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle cx="60" cy="60" r="46" fill="#fffef5" stroke="#111" stroke-width="3"/>
+              <line x1="60" y1="14" x2="60" y2="106" stroke="#111" stroke-width="3"/>
+              <line x1="14" y1="60" x2="106" y2="60" stroke="#111" stroke-width="3" stroke-dasharray="6 6"/>
+            </svg>
+            <div>
+              <strong>Hình tròn</strong>
+              <div class="tiny">Bán kính, đường kính & toạ độ tâm</div>
+            </div>
+          </div>
+          <div class="math-card">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <path d="M5 60 L115 60" stroke="#111" stroke-width="2"/>
+              <path d="M60 5 L60 115" stroke="#111" stroke-width="2"/>
+              <path d="M10 110 Q60 10 110 110" fill="none" stroke="#F6C90E" stroke-width="4"/>
+            </svg>
+            <div>
+              <strong>Đồ thị bậc hai</strong>
+              <div class="tiny">Đỉnh, trục đối xứng, hướng bề lõm</div>
+            </div>
+          </div>
+          <div class="math-card">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <rect x="10" y="15" width="100" height="90" rx="10" fill="#fffef5" stroke="#111" stroke-width="2"/>
+              <text x="20" y="45" font-size="16" font-family="ui-monospace,Menlo,monospace">a² + b² = c²</text>
+              <text x="20" y="70" font-size="16" font-family="ui-monospace,Menlo,monospace">S = πr²</text>
+              <text x="20" y="95" font-size="16" font-family="ui-monospace,Menlo,monospace">∑ i=1..n</text>
+            </svg>
+            <div>
+              <strong>Công thức vàng</strong>
+              <div class="tiny">Pytago, diện tích hình tròn, tổng dãy số</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quan-li-lop" data-guard="teacher" aria-labelledby="ql-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="ql-title">Quản lí lớp học</h2>
+          <span class="hint">Chỉ giáo viên xem được. Nhập/Xuất CSV & chấm điểm.</span>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="grid-column:span 12">
+            <h3>Nhập danh sách học sinh (CSV)</h3>
+            <p class="tiny">Định dạng: classId, studentCode, pin, name, lessonId, score, rank, total, status, progress, remark</p>
+            <div class="actions">
+              <input type="file" id="csv-file" accept=".csv,text/csv" />
+              <button class="btn-small" type="button" id="btn-import">Tải lên</button>
+              <span class="tiny" id="import-result"></span>
+            </div>
+          </div>
+
+          <div class="card" style="grid-column:span 12">
+            <h3>Xuất / Tải mẫu CSV</h3>
+            <div class="row">
+              <div>
+                <label for="export-class">Chọn lớp để xuất</label>
+                <select id="export-class">
+                  <option value="10A1">10A1</option>
+                </select>
+              </div>
+              <div class="actions" style="align-items:end">
+                <button class="btn-small" type="button" id="btn-export">Xuất CSV lớp</button>
+                <button class="btn-small btn-outline" type="button" id="btn-template">Tải CSV mẫu</button>
+              </div>
+            </div>
+            <p class="tiny">Có thể sửa file đã xuất rồi nhập lại.</p>
+          </div>
+
+          <div class="card" style="grid-column:span 12">
+            <h3>Điểm & Thứ hạng theo bài (VD: 10A1)</h3>
+            <div class="table-wrap" role="region" aria-label="Bảng điểm lớp" tabindex="0">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Học sinh</th>
+                    <th>Bài</th>
+                    <th>Điểm</th>
+                    <th>Thứ hạng</th>
+                    <th>Nhận xét</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hoc-tap" aria-labelledby="study-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="study-title">Học tập</h2>
+          <span class="hint">Chọn lớp → Nhập mã học sinh để xem nội dung cá nhân</span>
+        </div>
+
+        <div class="study-gate" role="form" aria-labelledby="gate-title">
+          <h3 id="gate-title">Truy cập khu học tập</h3>
+          <div class="row">
+            <div>
+              <label for="gate-class">Chọn lớp</label>
+              <select id="gate-class" name="class" aria-describedby="class-help">
+                <option value="">— Chọn lớp —</option>
+                <option>10A1</option>
+              </select>
+              <p id="class-help" class="tiny">Phải trùng với lớp giáo viên đã đăng tải.</p>
+            </div>
+            <div>
+              <label for="gate-code">Nhập mã học sinh</label>
+              <input id="gate-code" name="studentCode" type="text" inputmode="text" placeholder="VD: 10A1-023" aria-describedby="code-help" />
+              <p id="code-help" class="tiny">Ví dụ dữ liệu seed: 10A1-023 hoặc 10A1-005</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn-small" type="button">Xem bài học</button>
+            <span class="tiny">(*Cần đăng nhập để tải dữ liệu cá nhân từ server.)</span>
+          </div>
+        </div>
+
+        <div id="student-private" style="margin-top:16px">
+          <div class="grid">
+            <div class="card">
+              <h3>Bài học</h3>
+              <ul class="tiny" id="lesson-list">
+                <li>Danh sách bài học sẽ hiển thị kèm bảng điểm bên cạnh.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Điểm số & Thứ hạng từng bài</h3>
+              <div class="table-wrap" role="region" aria-label="Bảng điểm cá nhân" tabindex="0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Bài</th>
+                      <th>Điểm</th>
+                      <th>Thứ hạng</th>
+                      <th>Trạng thái</th>
+                    </tr>
+                  </thead>
+                  <tbody id="student-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Tiến độ hoàn thành</h3>
+              <div class="tiny" id="student-progress-text">Hoàn thành: <strong>0%</strong></div>
+              <div class="progress"><span id="student-progress-bar" style="width:0%"></span></div>
+            </div>
+
+            <div class="card">
+              <h3>Nhận xét cá nhân (mẫu)</h3>
+              <div class="remarks">
+                <div class="pill good">✅ Lập luận vững, trình bày sáng sủa.</div>
+                <div class="pill good">🌟 Biết kiểm tra điều kiện áp dụng bất đẳng thức.</div>
+                <div class="pill">💡 Góp ý: Cần luyện tốc độ và soát dấu kỹ hơn.</div>
+              </div>
+            </div>
+
+            <div class="card" data-guard="teacher" style="grid-column:span 12">
+              <h3>Chấm bài & Nhận xét (Giáo viên)</h3>
+              <div class="row">
+                <div>
+                  <label for="grade-code">Mã học sinh</label>
+                  <input id="grade-code" type="text" placeholder="VD: 10A1-023" />
+                </div>
+                <div>
+                  <label for="grade-lesson">Mã bài (VD: cauchy1)</label>
+                  <input id="grade-lesson" type="text" placeholder="cauchy1 / quad / combo" />
+                </div>
+              </div>
+              <div class="row" style="margin-top:12px">
+                <div>
+                  <label for="grade">Điểm số</label>
+                  <input id="grade" type="number" min="0" max="10" step="0.25" placeholder="Ví dụ: 8.75" />
+                </div>
+                <div>
+                  <label for="comment">Nhận xét</label>
+                  <textarea id="comment" rows="3" placeholder="Nhận xét chi tiết..."></textarea>
+                </div>
+              </div>
+              <div class="actions" style="margin-top:12px">
+                <button class="btn-small" type="button" id="btn-save-grade">Lưu nhận xét</button>
+                <span class="tiny">(*Chỉ giáo viên. Sau khi lưu, bảng lớp sẽ cập nhật.)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="lien-he" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="contact-title">Liên hệ</h2>
+          <span class="hint">Kết nối để được hỗ trợ nhanh</span>
+        </div>
+        <div class="grid">
+          <div class="card" style="grid-column:span 7">
+            <h3>Gửi tin nhắn</h3>
+            <div class="row">
+              <div>
+                <label for="name">Họ và tên</label>
+                <input id="name" type="text" placeholder="Nguyễn Văn A" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="ban@vidu.com" />
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <label for="msg">Nội dung</label>
+              <textarea id="msg" rows="4" placeholder="Mình cần hỗ trợ về..."></textarea>
+            </div>
+            <div class="actions" style="margin-top:12px">
+              <button class="btn-small" type="button">Gửi</button>
+              <span class="tiny">(*Form demo giao diện.)</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Thông tin</h3>
+            <p class="tiny">Email: <strong>contact@hocvoicophuong.vn</strong><br/>Địa chỉ: Quận 1, TP.HCM</p>
+            <p class="tiny">Giờ làm việc: 08:00–20:00 (T2–T7)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <p class="copy">© 2025 Học Toán cùng cô Phương. Mọi quyền được bảo lưu.</p>
+      <div class="social" aria-label="Mạng xã hội">
+        <a href="#" aria-label="Facebook" title="Facebook">f</a>
+        <a href="#" aria-label="YouTube" title="YouTube">▶</a>
+        <a href="#" aria-label="TikTok" title="TikTok">♬</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  function $(sel, root=document){ return root.querySelector(sel); }
+  function $all(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+
+  async function api(path, opts={}){
+    const res = await fetch(path, { credentials:'include', headers:{'Content-Type':'application/json'}, ...opts });
+    if(!res.ok){
+      let msg = 'HTTP ' + res.status;
+      try { const j = await res.json(); if(j.error) msg = j.error; } catch {}
+      throw new Error(msg);
+    }
+    return res.json();
+  }
+
+  function setRoleUI(role){
+    document.body.dataset.role = role || 'guest';
+    const loginBtn = $('#login-teacher');
+    const logoutBtn = $('#logout');
+    const who = $('#whoami');
+    if(loginBtn && logoutBtn && who){
+      loginBtn.style.display = (role==='teacher') ? 'none' : 'inline-block';
+      logoutBtn.style.display = (role==='guest') ? 'none' : 'inline-block';
+      who.textContent = role==='teacher' ? 'Bạn đang ở vai trò: Giáo viên' :
+                        role==='student' ? 'Bạn đang ở vai trò: Học sinh' : '';
+    }
+  }
+
+  async function refreshMe(){
+    const me = await api('/auth/me').catch(()=>({role:'guest'}));
+    setRoleUI(me.role);
+    if(me.role==='student') {
+      await loadStudent();
+      $('#student-private')?.scrollIntoView({behavior:'smooth'});
+    }
+    if(me.role==='teacher'){
+      await loadAdminClass($('#export-class')?.value || '10A1');
+    }
+  }
+
+  const TEACHER_USERNAME = 'phuong'; // khớp ADMIN_USER trong .env
+  async function loginTeacherByCode(){
+    const code = prompt('Nhập MÃ GIÁO VIÊN (ADMIN_PASS):','');
+    if(!code) return;
+    await api('/auth/login-teacher', { method:'POST', body: JSON.stringify({ user: TEACHER_USERNAME, pass: code })});
+    await refreshMe();
+  }
+
+  async function logoutFlow(){
+    await api('/auth/logout', { method:'POST' });
+    setRoleUI('guest');
+  }
+
+  async function loadStudent(){
+    const data = await api('/student/grades');
+    const tbody = $('#student-table-body');
+    if(tbody){
+      tbody.innerHTML = (data.grades||[]).map(g=>{
+        const lesson = (data.lessons||[]).find(l=>l.id===g.lessonId);
+        const name = lesson ? lesson.name : g.lessonId;
+        const score = (g.score==null) ? '—' : Number(g.score).toFixed(2);
+        const rank  = (g.rank==null || g.total==null) ? '—' : `${g.rank}/${g.total}`;
+        return `<tr>
+          <td>${name}</td>
+          <td>${score}</td>
+          <td>${rank}</td>
+          <td>${g.status||''}</td>
+        </tr>`;
+      }).join('');
+    }
+    const prog = await api('/student/progress').catch(()=>({progress:0}));
+    $('#student-progress-text').innerHTML = `Hoàn thành: <strong>${prog.progress||0}%</strong>`;
+    $('#student-progress-bar').style.width = (prog.progress||0) + '%';
+    $('#student-private').style.display = 'block';
+  }
+
+  async function loadAdminClass(classId){
+    const data = await api(`/admin/class/${encodeURIComponent(classId)}/grades`);
+    const tbody = $('#admin-table-body');
+    if(!tbody) return;
+    tbody.innerHTML = data.rows.map(r=>`
+      <tr>
+        <td>${r.studentName} (${r.studentCode})</td>
+        <td>${r.lessonId}</td>
+        <td>${r.score==null ? '—' : Number(r.score).toFixed(2)}</td>
+        <td>${(r.rank==null||r.total==null)?'—': `${r.rank}/${r.total}`}</td>
+        <td>${r.remark||''}</td>
+      </tr>
+    `).join('');
+  }
+
+  async function submitGrade(){
+    const classId = $('#export-class')?.value || '10A1';
+    const studentCode = $('#grade-code')?.value?.trim();
+    const lessonId = $('#grade-lesson')?.value?.trim();
+    const score = $('#grade')?.value ? Number($('#grade').value) : undefined;
+    const remark = $('#comment')?.value?.trim() ?? '';
+    if(!studentCode || !lessonId){ alert('Nhập mã học sinh và mã bài.'); return; }
+    await api('/admin/grade', {
+      method:'POST',
+      body: JSON.stringify({ classId, studentCode, lessonId, score, remark, status:'Đã nộp', progress:100 })
+    });
+    alert('Đã lưu.');
+    await loadAdminClass(classId);
+  }
+
+  async function importCSV(){
+    const fileInput = $('#csv-file');
+    const info = $('#import-result');
+    if(!fileInput?.files?.length){ alert('Chọn file CSV trước.'); return; }
+    const form = new FormData();
+    form.append('file', fileInput.files[0]);
+    try{
+      info.textContent = 'Đang nhập...';
+      const res = await fetch('/admin/import-students', { method:'POST', body: form, credentials:'include' });
+      const json = await res.json();
+      if(!res.ok) throw new Error(json.error || 'Lỗi import');
+      info.textContent = `✅ ${json.createdStudents} HS mới, ${json.updatedStudents} HS cập nhật, ${json.createdGrades} điểm mới, ${json.updatedGrades} điểm cập nhật (tổng ${json.rows} dòng).`
+        + (json.errors?.length ? ` Lỗi: ${json.errors.length} dòng.` : '');
+      await loadAdminClass($('#export-class')?.value || '10A1');
+    }catch(e){
+      info.textContent = '❌ ' + e.message;
+    }
+  }
+  function openDownload(url){ window.open(url, '_blank'); }
+
+  window.addEventListener('DOMContentLoaded', async ()=>{
+    $('#login-teacher')?.addEventListener('click', loginTeacherByCode);
+    $('#logout')?.addEventListener('click', logoutFlow);
+
+    const studyBtn = $all('#hoc-tap .actions .btn-small').find(b=>/Xem bài học/i.test(b.textContent||''));
+    const sel = $('#gate-class');
+    const code = $('#gate-code');
+    studyBtn?.addEventListener('click', async ()=>{
+      if(!sel.value || !code.value){ alert('Vui lòng chọn lớp và nhập mã học sinh.'); return; }
+      try{
+        await api('/auth/login-student', { method:'POST', body: JSON.stringify({ class: sel.value, code: code.value }) });
+        await refreshMe();
+      }catch(e){ alert(e.message); }
+    });
+
+    $('#btn-save-grade')?.addEventListener('click', async ()=>{ try{ await submitGrade(); }catch(e){ alert(e.message); } });
+    $('#btn-import')?.addEventListener('click', importCSV);
+    $('#btn-export')?.addEventListener('click', ()=>{
+      const classId = $('#export-class')?.value || '10A1';
+      openDownload(`/admin/export-students?classId=${encodeURIComponent(classId)}`);
+    });
+    $('#btn-template')?.addEventListener('click', ()=> openDownload('/admin/template-students'));
+
+    await refreshMe();
+  });
+  </script>
+</body>
+</html>

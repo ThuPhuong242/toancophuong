@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: math-class
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_USER
+        value: phuong
+      - key: ADMIN_PASS
+        value: secret123

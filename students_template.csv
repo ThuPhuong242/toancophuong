@@ -1,0 +1,6 @@
+classId,studentCode,pin,name,lessonId,score,rank,total,status,progress,remark
+10A1,10A1-023,1234,Nguyễn Minh An,cauchy1,9,2,45,Đã nộp,100,
+10A1,10A1-023,1234,Nguyễn Minh An,quad,,,45,Đang làm,40,
+10A1,10A1-005,5678,Trần Thu Hà,cauchy1,7.75,12,45,Đã nộp,100,
+10A1,10A1-005,5678,Trần Thu Hà,quad,8.25,6,45,Đã nộp,100,
+10A1,10A1-005,5678,Trần Thu Hà,combo,,,,Chưa bắt đầu,0,
